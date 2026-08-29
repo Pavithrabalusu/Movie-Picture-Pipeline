@@ -115,10 +115,10 @@ jobs:
             --name $EKS_CLUSTER_NAME
 
       - name: Update Kubernetes image
-        working-directory: starter/backend
+        working-directory: starter/backend/k8s
         run: |
           kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
-          kubectl apply -k k8s
+          kubectl apply -k .
 
       - name: Wait for rollout
         run: |
